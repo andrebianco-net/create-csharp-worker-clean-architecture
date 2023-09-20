@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductFeederService.Application", "ProductFeederService.Application\ProductFeederService.Application.csproj", "{01DB0C35-1AC0-4472-8067-82C84BF6AC9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductFeederService.Infra.IoC", "ProductFeederService.Infra.IoC\ProductFeederService.Infra.IoC.csproj", "{526C6DB2-9D06-40D3-BB18-4693E64AD37F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01DB0C35-1AC0-4472-8067-82C84BF6AC9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DB0C35-1AC0-4472-8067-82C84BF6AC9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DB0C35-1AC0-4472-8067-82C84BF6AC9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DB0C35-1AC0-4472-8067-82C84BF6AC9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526C6DB2-9D06-40D3-BB18-4693E64AD37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526C6DB2-9D06-40D3-BB18-4693E64AD37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526C6DB2-9D06-40D3-BB18-4693E64AD37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526C6DB2-9D06-40D3-BB18-4693E64AD37F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
