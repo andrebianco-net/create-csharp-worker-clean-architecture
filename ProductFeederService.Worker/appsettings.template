@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "YOUR STRING CONNECTION"
+    "DefaultConnection": "YOUR STRING CONNECTION MONGODB"
   },
   "Logging": {
     "LogLevel": {
@@ -15,6 +15,8 @@
     "Folder": "ProductFeederServiceWorkerLog"
   },
   "API": {
-    "UrlApi": "http://localhost:5205/api/Token/LoginUser"
+    "UrlApi": "http://localhost:5205/api/Token/LoginUser",
+    "User": "YOUR API USER",
+    "Password": "YOUR PASSWORD'S API USER"
   }
 }
