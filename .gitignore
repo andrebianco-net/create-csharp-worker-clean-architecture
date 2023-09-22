@@ -1,6 +1,7 @@
 # Configuration file
 appsettings.json
 Migrations/
+ProductFeederServiceWorkerLog/
 
 # Build results
 artifacts/

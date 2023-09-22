@@ -1,8 +1,20 @@
 {
+  "ConnectionStrings": {
+    "DefaultConnection": "YOUR STRING CONNECTION"
+  },
   "Logging": {
     "LogLevel": {
       "Default": "Information",
       "Microsoft.Hosting.Lifetime": "Information"
     }
+  },
+  "Worker": {
+    "Interval": 1000
+  },
+  "Serilog": {
+    "Folder": "ProductFeederServiceWorkerLog"
+  },
+  "API": {
+    "UrlApi": "http://localhost:5205/api/Token/LoginUser"
   }
 }
