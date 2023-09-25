@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProductFeederService.Application.Services;
+using ProductFeederService.Application.Interfaces;
+using ProductFeederService.Application.Mappings;
+using ProductFeederService.Domain.Interfaces;
 using ProductFeederService.Infra.Data.Context;
+using ProductFeederService.Infra.Data.Repositories;
 
 
 namespace ProductFeederService.Infra.IoC
@@ -17,6 +22,16 @@ namespace ProductFeederService.Infra.IoC
                             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
                         )
             );
+
+            // Repository
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // Service
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductFeederAppService, ProductFeederAppService>();
+
+            // Mapper
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));            
 
             return services;
         }

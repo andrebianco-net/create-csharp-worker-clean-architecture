@@ -1,10 +1,13 @@
+using ProductFeederService.Infra.IoC;
 using ProductFeederService.Worker;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((hostContext, services) =>
     {
-        services.AddHostedService<ProductFeederServiceWorker>();
-    })
+        services.AddInfrastructure(hostContext.Configuration);        
+        services.AddHostedService<ProductFeederServiceWorker>();        
+    })  
+    .UseWindowsService()
     .Build();
 
 host.Run();

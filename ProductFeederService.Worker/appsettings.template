@@ -14,6 +14,10 @@
   "Serilog": {
     "Folder": "ProductFeederServiceWorkerLog"
   },
+  "MongoDB": {
+    "Database": "YOUR DATABASE",
+    "Collection": "Products"
+  },  
   "API": {
     "UrlApi": "http://localhost:5205/api/Token/LoginUser",
     "User": "YOUR API USER",
