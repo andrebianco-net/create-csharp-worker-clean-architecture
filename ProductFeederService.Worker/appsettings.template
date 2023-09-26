@@ -1,7 +1,4 @@
 {
-  "ConnectionStrings": {
-    "DefaultConnection": "YOUR STRING CONNECTION MONGODB"
-  },
   "Logging": {
     "LogLevel": {
       "Default": "Information",
@@ -15,8 +12,10 @@
     "Folder": "ProductFeederServiceWorkerLog"
   },
   "MongoDB": {
-    "Database": "YOUR DATABASE",
-    "Collection": "Products"
+    "ConnectionURI": "YOUR MONGODB URI",
+    "DatabaseName": "YOUR DATABASE NAME",
+    "CollectionName": "Products"
+  },
   },  
   "API": {
     "UrlApi": "http://localhost:5205/api/Token/LoginUser",

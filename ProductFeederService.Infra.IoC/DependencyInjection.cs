@@ -5,8 +5,9 @@ using ProductFeederService.Application.Services;
 using ProductFeederService.Application.Interfaces;
 using ProductFeederService.Application.Mappings;
 using ProductFeederService.Domain.Interfaces;
-using ProductFeederService.Infra.Data.Context;
 using ProductFeederService.Infra.Data.Repositories;
+using ProductFeederService.Infra.Data.Settings;
+using ZstdSharp.Unsafe;
 
 
 namespace ProductFeederService.Infra.IoC
@@ -15,12 +16,14 @@ namespace ProductFeederService.Infra.IoC
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options =>
-                options.UseSqlServer(
-                            configuration.GetConnectionString("DefaultConnection"),
-                            b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
-                        )
+            
+            // MongoDB
+            services.Configure<MongoDBSettings>(
+                options => {
+                    options.ConnectionURI = configuration["MongoDB:ConnectionURI"];
+                    options.DatabaseName = configuration["MongoDB:DatabaseName"];
+                    options.CollectionName = configuration["MongoDB:CollectionName"];
+                }
             );
 
             // Repository

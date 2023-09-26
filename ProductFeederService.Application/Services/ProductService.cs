@@ -1,6 +1,7 @@
 using AutoMapper;
 using ProductFeederService.Application.DTOs;
 using ProductFeederService.Application.Interfaces;
+using ProductFeederService.Domain.Entities;
 using ProductFeederService.Domain.Interfaces;
 
 namespace ProductFeederService.Application.Services
@@ -20,6 +21,12 @@ namespace ProductFeederService.Application.Services
         {
             var productsEntity = await _productRepository.GetProductsAsync();
             return _mapper.Map<IEnumerable<ProductDTO>>(productsEntity);
+        }
+
+        public async Task UpdateProduct(ProductDTO productDTO)
+        {
+            Product product = _mapper.Map<Product>(productDTO);
+            await _productRepository.UpdateProductAsync(product);
         }
     }
 }
