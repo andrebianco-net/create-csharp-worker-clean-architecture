@@ -11,12 +11,17 @@ namespace ProductFeederService.Infra.IoC
         {
             string folder = configuration["Serilog:Folder"];
             string file = configuration["Serilog:File"];
+            int size = Convert.ToInt32(configuration["Serilog:Size"]);
 
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Debug()
                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
                .Enrich.FromLogContext()
-               .WriteTo.File($"{folder}/{file}")
+               .WriteTo.File(
+                    $"{folder}/{file}", 
+                    fileSizeLimitBytes: size,
+                    rollOnFileSizeLimit: true
+                )
                .CreateLogger();
 
             services.AddSingleton(Log.Logger);      

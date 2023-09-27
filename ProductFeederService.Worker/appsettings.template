@@ -9,7 +9,9 @@
     "Interval": 1000
   },
   "Serilog": {
-    "Folder": "ProductFeederServiceWorkerLog"
+    "Folder": "Log",
+    "File": "ProductFeederServiceWorker.log",
+    "Size": 5242880
   },
   "MongoDB": {
     "ConnectionURI": "YOUR MONGODB URI",

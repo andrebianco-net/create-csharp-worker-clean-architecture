@@ -23,8 +23,6 @@ namespace ProductFeederService.Application.Services
             try
             {
                 
-                _logger.LogWarning("ProductFeederAppService -> TestWWW");
-
                 IEnumerable<ProductDTO> products = await _productService.GetProducts();
                 List<ProductDTO> productsForUpdate = products.Where(x => x.productUpdatedAt == null).ToList();
 
@@ -45,7 +43,7 @@ namespace ProductFeederService.Application.Services
             }
             catch (System.Exception ex)
             {
-                
+                _logger.LogError($"ProductFeederAppService -> {ex.Message}");
             }
             
         }

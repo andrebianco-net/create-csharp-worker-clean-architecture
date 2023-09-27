@@ -19,7 +19,6 @@ public class ProductFeederServiceWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-
         while (!stoppingToken.IsCancellationRequested)
         {
             _logger.LogInformation($"ProductFeederServiceWorker -> Worker running at: {DateTimeOffset.Now}");
