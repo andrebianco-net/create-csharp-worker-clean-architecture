@@ -2,6 +2,7 @@
 appsettings.json
 Migrations/
 ProductFeederServiceWorkerLog/
+Log/
 
 # Build results
 artifacts/

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductFeederService.Application.Services;
 using ProductFeederService.Application.Interfaces;
@@ -7,7 +6,6 @@ using ProductFeederService.Application.Mappings;
 using ProductFeederService.Domain.Interfaces;
 using ProductFeederService.Infra.Data.Repositories;
 using ProductFeederService.Infra.Data.Settings;
-using ZstdSharp.Unsafe;
 
 
 namespace ProductFeederService.Infra.IoC

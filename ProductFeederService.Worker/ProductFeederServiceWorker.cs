@@ -22,7 +22,7 @@ public class ProductFeederServiceWorker : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+            _logger.LogInformation($"ProductFeederServiceWorker -> Worker running at: {DateTimeOffset.Now}");
             await ProductFeederRun(stoppingToken);
             int interval = int.Parse(_configuration["Worker:Interval"].ToString());
             await Task.Delay(interval, stoppingToken);

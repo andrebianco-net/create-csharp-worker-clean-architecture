@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using ProductFeederService.Application.DTOs;
 using ProductFeederService.Application.Interfaces;
 
@@ -7,10 +8,13 @@ namespace ProductFeederService.Application.Services
     {
 
         private readonly IProductService _productService;
+        private readonly ILogger<ProductFeederAppService> _logger;        
 
-        public ProductFeederAppService(IProductService productService)
+        public ProductFeederAppService(IProductService productService,
+                                       ILogger<ProductFeederAppService> logger)
         {
             _productService = productService;
+            _logger = logger;
         }
 
         public async Task ProductFeederRun()
@@ -19,6 +23,8 @@ namespace ProductFeederService.Application.Services
             try
             {
                 
+                _logger.LogWarning("ProductFeederAppService -> TestWWW");
+
                 IEnumerable<ProductDTO> products = await _productService.GetProducts();
                 List<ProductDTO> productsForUpdate = products.Where(x => x.productUpdatedAt == null).ToList();
 
