@@ -26,10 +26,12 @@ namespace ProductFeederService.Infra.IoC
 
             // Repository
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IExternalAPIRepository, ExternalAPIRepository>();
 
             // Service
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductFeederAppService, ProductFeederAppService>();
+            services.AddScoped<IExternalAPIService, ExternalAPIService>();
 
             // Mapper
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));            

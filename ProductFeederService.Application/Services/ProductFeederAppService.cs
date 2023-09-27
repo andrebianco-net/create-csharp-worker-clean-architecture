@@ -8,12 +8,15 @@ namespace ProductFeederService.Application.Services
     {
 
         private readonly IProductService _productService;
+        private readonly IExternalAPIService _productExternalAPIService;
         private readonly ILogger<ProductFeederAppService> _logger;        
 
         public ProductFeederAppService(IProductService productService,
+                                       IExternalAPIService productExternalAPIService,
                                        ILogger<ProductFeederAppService> logger)
         {
             _productService = productService;
+            _productExternalAPIService = productExternalAPIService;
             _logger = logger;
         }
 
@@ -25,6 +28,7 @@ namespace ProductFeederService.Application.Services
                 
                 IEnumerable<ProductDTO> products = await _productService.GetProducts();
                 List<ProductDTO> productsForUpdate = products.Where(x => x.productUpdatedAt == null).ToList();
+
 
                 //Test
                 

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -11,13 +12,26 @@ namespace ProductFeederService.Infra.Data.Repositories
     {
 
         private readonly IMongoCollection<Product> _productsRepository;
+        private readonly ILogger<ProductRepository> _logger;
 
-        public ProductRepository(IOptions<MongoDBSettings> mongoDBSettings)
+        public ProductRepository(IOptions<MongoDBSettings> mongoDBSettings,
+                                 ILogger<ProductRepository> logger)
         {
-            
-            MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
-            IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
-            _productsRepository = database.GetCollection<Product>(mongoDBSettings.Value.CollectionName);
+
+            _logger = logger;
+
+            try
+            {
+
+                MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
+                IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
+                _productsRepository = database.GetCollection<Product>(mongoDBSettings.Value.CollectionName);
+                
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError($"ProductRepository -> {ex.Message}");
+            }            
 
         }
 
