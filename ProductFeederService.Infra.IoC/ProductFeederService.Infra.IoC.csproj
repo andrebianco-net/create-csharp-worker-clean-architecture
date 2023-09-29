@@ -10,6 +10,7 @@
     <ProjectReference Include="..\ProductFeederService.Domain\ProductFeederService.Domain.csproj" />
     <ProjectReference Include="..\ProductFeederService.Application\ProductFeederService.Application.csproj" />
     <ProjectReference Include="..\ProductFeederService.Infra.Data\ProductFeederService.Infra.Data.csproj" />
+    <ProjectReference Include="..\ProductFeederService.ExternalAPI\ProductFeederService.ExternalAPI.csproj" />
   </ItemGroup>  
 
   <ItemGroup>

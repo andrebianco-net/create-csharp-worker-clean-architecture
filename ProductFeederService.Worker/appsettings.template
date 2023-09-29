@@ -20,8 +20,10 @@
   },
   },  
   "API": {
-    "UrlApi": "http://localhost:5205/api/Token/LoginUser",
+    "UrlLoginUser": "http://localhost:5205/api/Token/LoginUser",
     "User": "YOUR API USER",
-    "Password": "YOUR PASSWORD'S API USER"
+    "Password": "YOUR PASSWORD'S API USER",
+    "UrlCategories": "http://localhost:5205/api/Categories",
+    "UrlProducts": "http://localhost:5205/api/Products"
   }
 }

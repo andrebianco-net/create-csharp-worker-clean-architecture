@@ -1,10 +1,12 @@
+using ProductFeederService.Domain.Entities;
+
 namespace ProductFeederService.Domain.Interfaces
 {
     public interface IExternalAPIRepository
     {
-        Task<int> GetCategory(string name);
-        Task PostCategory();
-        Task<int> GetProduct(string name);
-        Task PostProduct();
+        Task<IEnumerable<CategoryAPI>> GetCategories();
+        Task<int> PostCategory(CategoryAPI category);
+        Task<IEnumerable<ProductAPI>> GetProducts();
+        Task<int> PostProduct(ProductAPI product);
     }
 }

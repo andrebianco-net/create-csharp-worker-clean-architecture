@@ -1,4 +1,4 @@
-namespace ProductFeederService.Infra.Data.Response
+namespace ProductFeederService.ExternalAPI.Response
 {
     public class ResponseLogin
     {

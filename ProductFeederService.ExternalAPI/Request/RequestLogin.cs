@@ -1,4 +1,4 @@
-namespace ProductFeederService.Infra.Data.Request
+namespace ProductFeederService.ExternalAPI.Request
 {
     public class RequestLogin
     {

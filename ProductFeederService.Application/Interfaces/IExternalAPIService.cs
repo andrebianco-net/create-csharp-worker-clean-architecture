@@ -1,10 +1,12 @@
+using ProductFeederService.Application.DTOs;
+
 namespace ProductFeederService.Application.Interfaces
 {
     public interface IExternalAPIService
     {
-        Task<int> GetCategory(string name);
-        Task PostCategory();
-        Task<int> GetProduct(string name);
-        Task PostProduct();
+        Task<IEnumerable<CategoryAPIDTO>> GetCategories();
+        Task<int> PostCategory(CategoryAPIDTO category);
+        Task<IEnumerable<ProductAPIDTO>> GetProducts();
+        Task<int> PostProduct(ProductAPIDTO product);
     }
 }

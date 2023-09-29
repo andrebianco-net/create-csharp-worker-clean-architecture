@@ -5,7 +5,9 @@ using ProductFeederService.Application.Interfaces;
 using ProductFeederService.Application.Mappings;
 using ProductFeederService.Domain.Interfaces;
 using ProductFeederService.Infra.Data.Repositories;
-using ProductFeederService.Infra.Data.Settings;
+using ProductFeederService.Infra.Data.Context;
+using ProductFeederService.ExternalAPI;
+using ProductFeederService.ExternalAPI.Interface;
 
 
 namespace ProductFeederService.Infra.IoC
@@ -32,6 +34,9 @@ namespace ProductFeederService.Infra.IoC
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductFeederAppService, ProductFeederAppService>();
             services.AddScoped<IExternalAPIService, ExternalAPIService>();
+
+            // External API
+            services.AddScoped<IProductRegistrationAPI, ProductRegistrationAPI>();
 
             // Mapper
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));            

@@ -1,86 +1,50 @@
-using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ProductFeederService.Domain.Entities;
 using ProductFeederService.Domain.Interfaces;
-using Newtonsoft;
-using Newtonsoft.Json;
-using ProductFeederService.Infra.Data.Request;
-using ProductFeederService.Infra.Data.Response;
+using ProductFeederService.ExternalAPI.Interface;
+using AutoMapper;
+using ProductFeederService.ExternalAPI.Request;
 
 namespace ProductFeederService.Infra.Data.Repositories
 {
     
     public class ExternalAPIRepository : IExternalAPIRepository
     {
-        private readonly IConfiguration _configuration;
+        private readonly IProductRegistrationAPI _productRegistrationAPI;
+        private readonly IMapper _mapper;
         private readonly ILogger<ExternalAPIRepository> _logger;
 
-        public ExternalAPIRepository(IConfiguration configuration,
+        public ExternalAPIRepository(IProductRegistrationAPI productRegistrationAPI,
+                                     IMapper mapper,
                                      ILogger<ExternalAPIRepository> logger)
         {
-            _configuration = configuration;
+            _productRegistrationAPI = productRegistrationAPI;
+            _mapper = mapper;
             _logger = logger;
         }
-
-        private async Task<string> Login()
+ 
+        public async Task<int> PostCategory(CategoryAPI category)
         {
-            string token = string.Empty;
-
-            try
-            {
-
-                RequestLogin requestLogin = new RequestLogin() {
-                    email = _configuration["API:User"],
-                    password = _configuration["API:Password"]
-                };
-
-                using (HttpClient client = new HttpClient())
-                {
-
-                    string url = _configuration["API:UrlApi"];
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(requestLogin), Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync(url, content);
-                    
-                    if (response != null)
-                    {
-                        string jsonString = await response.Content.ReadAsStringAsync();
-                        ResponseLogin responseLogin = JsonConvert.DeserializeObject<ResponseLogin>(jsonString);
-                        token = responseLogin.token;
-                    }
-
-                }
-
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError($"ExternalAPIRepository -> {ex.Message}");
-            }
-
-            return token;
+            RequestCategory newCategory = _mapper.Map<RequestCategory>(category);
+            return await _productRegistrationAPI.PostCategory(newCategory);
         }
 
-        public async Task PostCategory()
+        public async Task<IEnumerable<CategoryAPI>> GetCategories()
         {
-            string token = await Login();
-            throw new NotImplementedException();
+            var categories = await _productRegistrationAPI.GetCategories();
+            return _mapper.Map<IEnumerable<CategoryAPI>>(categories);
         }
 
-        public async Task<int> GetCategory(string name)
+        public async Task<int> PostProduct(ProductAPI product)
         {
-            string token = await Login();
-            throw new NotImplementedException();
-        }
-
-        public async Task PostProduct()
-        {
-            string token = await Login();
-            throw new NotImplementedException();
+            RequestProduct newProduct = _mapper.Map<RequestProduct>(product);
+            return await _productRegistrationAPI.PostProduct(newProduct);
         }        
 
-        public async Task<int> GetProduct(string name)
+        public async Task<IEnumerable<ProductAPI>> GetProducts()
         {
-            string token = await Login();
-            throw new NotImplementedException();
+            var products = await _productRegistrationAPI.GetProducts();
+            return _mapper.Map<IEnumerable<ProductAPI>>(products);
         }
 
     }

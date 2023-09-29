@@ -13,11 +13,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>none</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ProductFeederService.Domain\ProductFeederService.Domain.csproj" />
+    <ProjectReference Include="..\ProductFeederService.ExternalAPI\ProductFeederService.ExternalAPI.csproj" />
   </ItemGroup>  
 
 </Project>

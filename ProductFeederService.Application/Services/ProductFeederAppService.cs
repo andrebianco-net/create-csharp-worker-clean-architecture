@@ -8,15 +8,15 @@ namespace ProductFeederService.Application.Services
     {
 
         private readonly IProductService _productService;
-        private readonly IExternalAPIService _productExternalAPIService;
+        private readonly IExternalAPIService _externalAPIService;
         private readonly ILogger<ProductFeederAppService> _logger;        
 
         public ProductFeederAppService(IProductService productService,
-                                       IExternalAPIService productExternalAPIService,
+                                       IExternalAPIService externalAPIService,
                                        ILogger<ProductFeederAppService> logger)
         {
             _productService = productService;
-            _productExternalAPIService = productExternalAPIService;
+            _externalAPIService = externalAPIService;
             _logger = logger;
         }
 
@@ -26,9 +26,34 @@ namespace ProductFeederService.Application.Services
             try
             {
                 
-                IEnumerable<ProductDTO> products = await _productService.GetProducts();
-                List<ProductDTO> productsForUpdate = products.Where(x => x.productUpdatedAt == null).ToList();
+                IEnumerable<ProductDTO> productsQueue = await _productService.GetProducts();
+                IEnumerable<ProductDTO> productsForUpdate = productsQueue.Where(x => x.productUpdatedAt == null).ToList();
 
+
+                CategoryAPIDTO newCategory = new CategoryAPIDTO()
+                {
+                    id = 0,
+                    name = "TestNOW3"
+                };
+
+                int idNewCategory = await _externalAPIService.PostCategory(newCategory);
+
+                IEnumerable<CategoryAPIDTO> categoriesForValidation = (IEnumerable<CategoryAPIDTO>) await _externalAPIService.GetCategories();
+
+                ProductAPIDTO newProduct = new ProductAPIDTO()
+                {
+                    id = 0,
+                    name = "Product 1",
+                    description = "Product 1",
+                    price = 1,
+                    stock = 1,
+                    image = "unavailable",
+                    categoryId = 1020
+                };
+
+                int idNewProduct = await _externalAPIService.PostProduct(newProduct);
+
+                IEnumerable<ProductAPIDTO> productsAPIForValidation = (IEnumerable<ProductAPIDTO>) await _externalAPIService.GetProducts();
 
                 //Test
                 

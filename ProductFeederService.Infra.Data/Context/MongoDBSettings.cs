@@ -1,4 +1,4 @@
-namespace ProductFeederService.Infra.Data.Settings
+namespace ProductFeederService.Infra.Data.Context
 {
     public class MongoDBSettings
     {

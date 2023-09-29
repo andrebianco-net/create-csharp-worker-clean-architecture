@@ -4,7 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using ProductFeederService.Domain.Entities;
 using ProductFeederService.Domain.Interfaces;
-using ProductFeederService.Infra.Data.Settings;
+using ProductFeederService.Infra.Data.Context;
 
 namespace ProductFeederService.Infra.Data.Repositories
 {

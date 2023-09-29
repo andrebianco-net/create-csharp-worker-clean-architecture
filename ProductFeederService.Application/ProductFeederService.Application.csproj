@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductFeederService.Domain\ProductFeederService.Domain.csproj" />
+    <ProjectReference Include="..\ProductFeederService.ExternalAPI\ProductFeederService.ExternalAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
