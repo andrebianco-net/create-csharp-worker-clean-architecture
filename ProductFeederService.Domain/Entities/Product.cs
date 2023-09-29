@@ -19,5 +19,7 @@ namespace ProductFeederService.Domain.Entities
         public string image { get; set; } = null;
         public string createdAt { get; set; } = null;
         public string productUpdatedAt { get; set; } = null;
+
+        public string admissionResult { get; set; } = null;
     }
 }
