@@ -30,6 +30,11 @@ namespace ProductFeederService.Application.Services
 
         public async Task<int> PostCategory(CategoryAPIDTO category)
         {
+            if (string.IsNullOrEmpty(category.name))
+            {
+                throw new InvalidOperationException("The name is required.");
+            }
+
             CategoryAPI newCategory = _mapper.Map<CategoryAPI>(category);
             return await _externalAPIRepository.PostCategory(newCategory);
         }
@@ -42,6 +47,36 @@ namespace ProductFeederService.Application.Services
 
         public async Task<int> PostProduct(ProductAPIDTO product)
         {
+            if (string.IsNullOrEmpty(product.name))
+            {
+                throw new InvalidOperationException("The name is required.");
+            }
+
+            if (string.IsNullOrEmpty(product.description))
+            {
+                throw new InvalidOperationException("The description is required.");
+            }
+
+            if (product.price <= 0)
+            {
+                throw new InvalidOperationException("The price is required.");
+            }
+
+            if (product.stock <= 0)
+            {
+                throw new InvalidOperationException("The stock is required.");
+            }
+            
+            if (string.IsNullOrEmpty(product.image))
+            {
+                throw new InvalidOperationException("The image is required.");
+            }
+            
+            if (product.categoryId <= 0)
+            {
+                throw new InvalidOperationException("The category is required.");
+            }
+
             ProductAPI newProduct = _mapper.Map<ProductAPI>(product);
             return await _externalAPIRepository.PostProduct(newProduct);
         }

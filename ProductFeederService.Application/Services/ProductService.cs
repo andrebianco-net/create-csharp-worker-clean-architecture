@@ -23,8 +23,13 @@ namespace ProductFeederService.Application.Services
             return _mapper.Map<IEnumerable<ProductDTO>>(productsEntity);
         }
 
-        public async Task UpdateProduct(ProductDTO productDTO)
+        public async Task UpdateProductAt(ProductDTO productDTO)
         {
+            if (string.IsNullOrEmpty(productDTO.productUpdatedAt))
+            {
+                throw new InvalidOperationException("The updated date is required.");
+            }
+
             Product product = _mapper.Map<Product>(productDTO);
             await _productRepository.UpdateProductAsync(product);
         }
