@@ -90,7 +90,7 @@ namespace ProductFeederService.Service.Tests
             //Arrange
             ProductDTO newProduct = new ProductDTO()
             {
-                Id = "651bf83c3a06084e2115feeb",
+                Id = "651c14833fb09e2a6a583645",
                 productUpdatedAt = ""
             };
 
@@ -104,7 +104,7 @@ namespace ProductFeederService.Service.Tests
         }
 
         [Theory]
-        [InlineData("651bf83c3a06084e2115feea")]
+        [InlineData("651c14833fb09e2a6a583645")]
         public async void ProductUpdatedAt_IsStringFilled_ResultValidOperation(string id)
         {
             //Arrange
@@ -123,6 +123,47 @@ namespace ProductFeederService.Service.Tests
 
             //Assert
             Assert.Equal(newProduct.productUpdatedAt, productUpdatedAt);
+        }
+
+        [Fact]
+        public async void ProductUpdatedAdmissionResult_IsStringEmpty_ResultInvalidOperation_WithTheUpdatedAdmissionIsRequiredMessage()
+        {
+            //Arrange
+            ProductDTO newProduct = new ProductDTO()
+            {
+                Id = "651c14833fb09e2a6a583645",
+                productUpdatedAt = ""
+            };
+
+            //Act
+            Func<Task> action = () => _productService.ProductUpdatedAdmissionResult(newProduct);
+
+            //Assert
+            InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(action);
+            
+            Assert.Equal("The updated admission is required.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("651c14833fb09e2a6a583645")]
+        public async void ProductUpdatedAdmissionResult_IsStringFilled_ResultValidOperation(string id)
+        {
+            //Arrange
+            ProductDTO newProduct = new ProductDTO()
+            {
+                Id = id,
+                admissionResult = "NOK"
+            };
+
+            //Act
+            await _productService.ProductUpdatedAdmissionResult(newProduct);
+
+            IEnumerable<ProductDTO> productsQueue = await _productService.GetProducts();
+
+            string admissionResult = productsQueue.SingleOrDefault(x => x.Id == id).admissionResult;
+
+            //Assert
+            Assert.Equal(newProduct.admissionResult, admissionResult);
         }
     }
 }

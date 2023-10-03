@@ -8,6 +8,6 @@ namespace ProductFeederService.Application.Interfaces
 
         Task ProductUpdatedAt(ProductDTO product);
 
-
+        Task ProductUpdatedAdmissionResult(ProductDTO productDTO);
     }
 }

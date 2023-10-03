@@ -8,5 +8,6 @@ namespace ProductFeederService.Domain.Interfaces
         Task<IEnumerable<Product>> GetProductsAsync();
         Task ProductUpdatedAt(Product product);
         Task DeleteProductAsync(Product product);
+        Task ProductUpdatedAdmissionResult(Product product);
     }
 }

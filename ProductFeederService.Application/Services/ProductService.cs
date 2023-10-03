@@ -33,5 +33,16 @@ namespace ProductFeederService.Application.Services
             Product product = _mapper.Map<Product>(productDTO);
             await _productRepository.ProductUpdatedAt(product);
         }
+
+        public async Task ProductUpdatedAdmissionResult(ProductDTO productDTO)
+        {
+            if (string.IsNullOrEmpty(productDTO.admissionResult))
+            {
+                throw new InvalidOperationException("The updated admission is required.");
+            }
+
+            Product product = _mapper.Map<Product>(productDTO);
+            await _productRepository.ProductUpdatedAdmissionResult(product);
+        }
     }
 }
