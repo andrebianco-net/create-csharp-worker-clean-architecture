@@ -6,7 +6,8 @@ namespace ProductFeederService.Application.Interfaces
     {
         Task<IEnumerable<ProductDTO>> GetProducts();
 
-        Task UpdateProductAt(ProductDTO product);
+        Task ProductUpdatedAt(ProductDTO product);
+
 
     }
 }

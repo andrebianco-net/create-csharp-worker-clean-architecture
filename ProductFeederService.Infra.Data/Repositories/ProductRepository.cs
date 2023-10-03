@@ -17,7 +17,6 @@ namespace ProductFeederService.Infra.Data.Repositories
         public ProductRepository(IOptions<MongoDBSettings> mongoDBSettings,
                                  ILogger<ProductRepository> logger)
         {
-
             _logger = logger;
 
             try
@@ -26,44 +25,38 @@ namespace ProductFeederService.Infra.Data.Repositories
                 MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
                 IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
                 _productsRepository = database.GetCollection<Product>(mongoDBSettings.Value.CollectionName);
-                
+
             }
             catch (System.Exception ex)
             {
                 _logger.LogError($"ProductRepository -> {ex.Message}");
-            }            
-
+            }
         }
 
         public async Task CreateProductAsync(Product product)
         {
-            
             await _productsRepository.InsertOneAsync(product);
-
         }
 
         public async Task DeleteProductAsync(Product product)
         {
-            
             FilterDefinition<Product> filter = Builders<Product>.Filter.Eq("Id", product.Id);
             await _productsRepository.DeleteOneAsync(filter);
-
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            
             return await _productsRepository.Find(new BsonDocument()).ToListAsync();
-
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task ProductUpdatedAt(Product product)
         {
-            
             FilterDefinition<Product> filter = Builders<Product>.Filter.Eq("Id", product.Id);
-            
-            await _productsRepository.ReplaceOneAsync(filter, product);
-            
+
+            var update = Builders<Product>.Update
+                            .Set(p => p.productUpdatedAt, product.productUpdatedAt);
+
+            await _productsRepository.UpdateOneAsync(filter, update);
         }
     }
 }

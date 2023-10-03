@@ -6,7 +6,7 @@ namespace ProductFeederService.Domain.Interfaces
     {
         Task CreateProductAsync(Product product);        
         Task<IEnumerable<Product>> GetProductsAsync();
-        Task UpdateProductAsync(Product product);
+        Task ProductUpdatedAt(Product product);
         Task DeleteProductAsync(Product product);
     }
 }
