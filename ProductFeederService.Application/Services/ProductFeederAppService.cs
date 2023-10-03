@@ -9,7 +9,7 @@ namespace ProductFeederService.Application.Services
 
         private readonly IProductService _productService;
         private readonly IExternalAPIService _externalAPIService;
-        private readonly ILogger<ProductFeederAppService> _logger;        
+        private readonly ILogger<ProductFeederAppService> _logger;
 
         public ProductFeederAppService(IProductService productService,
                                        IExternalAPIService externalAPIService,
@@ -25,56 +25,102 @@ namespace ProductFeederService.Application.Services
 
             try
             {
-                
+
+                // Data from MongoDB
                 IEnumerable<ProductDTO> productsQueue = await _productService.GetProducts();
                 IEnumerable<ProductDTO> productsForUpdate = productsQueue.Where(x => x.productUpdatedAt == null).ToList();
 
+                // Data from External API
+                IEnumerable<CategoryAPIDTO> productsCategoryAPI = await _externalAPIService.GetCategories();
+                IEnumerable<ProductAPIDTO> productsExternalAPI = await _externalAPIService.GetProducts();
 
-                CategoryAPIDTO newCategory = new CategoryAPIDTO()
+                int idCategory = 0;
+
+                // For each Product which will be updated
+                foreach (ProductDTO item in productsForUpdate)
                 {
-                    id = 0,
-                    name = "TestNOW3"
-                };
 
-                int idNewCategory = await _externalAPIService.PostCategory(newCategory);
+                    // If it doens't exist
+                    if (!productsCategoryAPI.Where(x => x.name == item.category).Any())
+                    {
+                        CategoryAPIDTO newCategory = new CategoryAPIDTO()
+                        {
+                            id = 0,
+                            name = item.category
+                        };
 
-                IEnumerable<CategoryAPIDTO> categoriesForValidation = (IEnumerable<CategoryAPIDTO>) await _externalAPIService.GetCategories();
+                        idCategory = await _externalAPIService.PostCategory(newCategory);
+                    }
+                    else
+                    {
+                        idCategory = productsCategoryAPI.FirstOrDefault(x => x.name == item.category).id;
+                    }
 
-                ProductAPIDTO newProduct = new ProductAPIDTO()
-                {
-                    id = 0,
-                    name = "Product 1",
-                    description = "Product 1",
-                    price = 1,
-                    stock = 1,
-                    image = "unavailable",
-                    categoryId = 1020
-                };
+                    // Serialization failure
+                    if (idCategory == 0)
+                    {
+                        ProductDTO serializationFailure = new ProductDTO()
+                        {
+                            Id = item.Id,
+                            admissionResult = "NOK. It was not possible to serialize Category. Maybe External API was offline."
+                        };
 
-                int idNewProduct = await _externalAPIService.PostProduct(newProduct);
+                        await _productService.ProductUpdatedAdmissionResult(serializationFailure);
 
-                IEnumerable<ProductAPIDTO> productsAPIForValidation = (IEnumerable<ProductAPIDTO>) await _externalAPIService.GetProducts();
+                        continue;
+                    }
 
-                //Test
-                
-                // decimal search = decimal.Parse("50.0");
-                // if(productsForUpdate.Where(x => x.price == search).Any())
-                // {
-                //     ProductDTO product = productsForUpdate.SingleOrDefault(x => x.price == search);
-                //     if(product != null)
-                //     {
-                //         product.productUpdatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                //         product.price = decimal.Parse("55.10");
-                //         await _productService.UpdateProduct(product);
-                //     }
-                // }
-                
+                    if (!productsExternalAPI.Where(x => x.name == item.name).Any())
+                    {
+                        ProductAPIDTO newProduct = new ProductAPIDTO()
+                        {
+                            id = 0,
+                            name = item.name,
+                            description = item.description,
+                            price = item.price,
+                            stock = item.stock,
+                            image = "unavailable",
+                            categoryId = idCategory
+                        };
+
+                        int idNewProduct = await _externalAPIService.PostProduct(newProduct);
+
+                        // Serialization failure
+                        if (idNewProduct == 0)
+                        {
+                            ProductDTO serializationFailure = new ProductDTO()
+                            {
+                                Id = item.Id,
+                                admissionResult = "NOK. It was not possible to serialize Product. Maybe External API was offline."
+                            };
+
+                            await _productService.ProductUpdatedAdmissionResult(serializationFailure);
+
+                            continue;
+                        }
+                        else
+                        {
+                            ProductDTO serializationSucess = new ProductDTO()
+                            {
+                                Id = item.Id,
+                                productUpdatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                                admissionResult = "OK. Serialization was realized successfully."
+                            };
+
+                            await _productService.ProductUpdatedAt(serializationSucess);
+                            await _productService.ProductUpdatedAdmissionResult(serializationSucess);
+                        }
+
+                    }
+
+                }
+
             }
             catch (System.Exception ex)
             {
                 _logger.LogError($"ProductFeederAppService -> {ex.Message}");
             }
-            
+
         }
     }
 }
