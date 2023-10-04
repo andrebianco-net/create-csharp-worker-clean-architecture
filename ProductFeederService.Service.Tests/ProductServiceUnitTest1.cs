@@ -84,13 +84,14 @@ namespace ProductFeederService.Service.Tests
             Assert.True(productsQueue.Count() >= 0);
         }
 
-        [Fact]
-        public async void ProductUpdatedAt_IsStringEmpty_ResultInvalidOperation_WithTheUpdatedDateIsRequiredMessage()
+        [Theory]
+        [InlineData("651c14833fb09e2a6a583645")]
+        public async void ProductUpdatedAt_IsStringEmpty_ResultInvalidOperation_WithTheUpdatedDateIsRequiredMessage(string id)
         {
             //Arrange
             ProductDTO newProduct = new ProductDTO()
             {
-                Id = "651c14833fb09e2a6a583645",
+                Id = id,
                 productUpdatedAt = ""
             };
 
@@ -125,13 +126,14 @@ namespace ProductFeederService.Service.Tests
             Assert.Equal(newProduct.productUpdatedAt, productUpdatedAt);
         }
 
-        [Fact]
-        public async void ProductUpdatedAdmissionResult_IsStringEmpty_ResultInvalidOperation_WithTheUpdatedAdmissionIsRequiredMessage()
+        [Theory]
+        [InlineData("651c14833fb09e2a6a583645")]
+        public async void ProductUpdatedAdmissionResult_IsStringEmpty_ResultInvalidOperation_WithTheUpdatedAdmissionIsRequiredMessage(string id)
         {
             //Arrange
             ProductDTO newProduct = new ProductDTO()
             {
-                Id = "651c14833fb09e2a6a583645",
+                Id = id,
                 productUpdatedAt = ""
             };
 
