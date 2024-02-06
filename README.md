@@ -41,7 +41,6 @@ $ git clone https://github.com/andrebianco-net/create-csharp-worker-clean-archit
     "ConnectionURI": "YOUR MONGODB URI",
     "DatabaseName": "YOUR DATABASE NAME",
     "CollectionName": "Products"
-  },
   },  
   "API": {
     "UrlLoginUser": "http://localhost:5205/api/Token/LoginUser",
