@@ -33,3 +33,7 @@ $ docker push youruricreatedinazurecontainerregistry.azurecr.io/product-feeder-s
 ###
 ![image](https://github.com/andrebianco-net/create-csharp-worker-clean-architecture/assets/453193/ed99bdc2-6836-4633-9e10-69345f9f2171)
 
+###
+![image](https://github.com/andrebianco-net/create-csharp-worker-clean-architecture/assets/453193/d7c683b7-55aa-43ed-b3a8-f55b85365fb7)
+
+
