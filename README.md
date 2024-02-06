@@ -21,6 +21,38 @@ $ git clone https://github.com/andrebianco-net/create-csharp-worker-clean-archit
 
 #### 2. Update file appsettings.json with a valid:
 
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "Worker": {
+    "Interval": 1000
+  },
+  "Serilog": {
+    "Folder": "Log",
+    "File": "ProductFeederServiceWorker.log",
+    "Size": 5242880
+  },
+  "MongoDB": {
+    "ConnectionURI": "YOUR MONGODB URI",
+    "DatabaseName": "YOUR DATABASE NAME",
+    "CollectionName": "Products"
+  },
+  },  
+  "API": {
+    "UrlLoginUser": "http://localhost:5205/api/Token/LoginUser",
+    "User": "YOUR API USER",
+    "Password": "YOUR PASSWORD'S API USER",
+    "UrlCategories": "http://localhost:5205/api/Categories",
+    "UrlProducts": "http://localhost:5205/api/Products"
+  }
+}
+```
+
 #### 3. Compile project:
 
 #### 4. Test project:
