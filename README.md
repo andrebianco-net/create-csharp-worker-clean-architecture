@@ -11,6 +11,12 @@ https://www.linkedin.com/in/andrebianco-net/
 
 ## General Scope:
 
+Product Feeder Service implementation propose a small example of how to create a Worker service using C#.
+
+C# .NET Core Worker based on Clean Architecture, using Worker, Repository and xUnit to test the implementation.
+
+The Solution will be a Worker which will consume a [C# .NET Core Web API REST](https://github.com/andrebianco-net/create-csharp-webapi-clean-architecture), log in via authentication method, to create and modify Categories and Products. The Web API will record data into SQL Server database.
+
 ## How to run this project
 
 #### 1. Clone project:
