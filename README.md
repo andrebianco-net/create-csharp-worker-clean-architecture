@@ -15,6 +15,10 @@ https://www.linkedin.com/in/andrebianco-net/
 
 #### 1. Clone project:
 
+```bash
+$ git clone https://github.com/andrebianco-net/create-csharp-worker-clean-architecture.git
+```
+
 #### 2. Update file appsettings.json with a valid:
 
 #### 3. Compile project:
