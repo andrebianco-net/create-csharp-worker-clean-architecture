@@ -54,13 +54,71 @@ $ git clone https://github.com/andrebianco-net/create-csharp-worker-clean-archit
 
 #### 3. Compile project:
 
+```bash
+$ dotnet build
+```
+
 #### 4. Test project:
+
+```bash
+$ dotnet test
+```
 
 #### 5. Run project:
 
+```bash
+$ dotnet run --project ProductFeederService.Worker/ProductFeederService.Worker.csproj
+```
+
 #### 6. MongoDB document
 
+As an example, the Json documents was created by [Data Ingestion Service](https://github.com/andrebianco-net/create-data-ingestion-python-mongodb) into Products collection.
+
+```json
+{
+  "_id": {
+    "$oid": "651c5dcf0c7cdeb0129d3ed7"
+  },
+  "category": "Racing Wheel",
+  "name": "Advant Racing",
+  "description": "Advant Racing Wheels for High Performance Cars",
+  "price": 100,
+  "stock": 10,
+  "image": "https://image.made-in-china.com/43f34j00OIeYilgMAdkR/Advant-Racing-Wheels-for-High-Performance-Cars.jpg",
+  "createdAt": "2023-10-03 15:30:39",
+  "productUpdatedAt": "2023-10-03 15:31:14",
+  "admissionResult": "OK. Serialization was realized successfully."
+}
+```
+
+```json
+{
+  "_id": {
+    "$oid": "651c5dcf0c7cdeb0129d3ed8"
+  },
+  "category": "Industrial Wheel",
+  "name": "Forlong Wheel",
+  "description": "Forlong Wheel Split Rim 3.00d-8 Et0 94/140/5 Tire 5.00-8 for Skid Loader and Industrial Equipment for Sale",
+  "price": 50,
+  "stock": 10,
+  "image": "https://image.made-in-china.com/43f34j00mlGrykHIrJzv/Forlong-Wheel-Split-Rim-3-00d-8-Et0-94-140-5-Tire-5-00-8-for-Skid-Loader-Industrial-Equipment-for-Sale.jpg",
+  "createdAt": "2023-10-03 15:30:39",
+  "productUpdatedAt": "2023-10-03 15:31:15",
+  "admissionResult": "OK. Serialization was realized successfully."
+}
+```
+
 #### 7. Set the log folder
+
+Define a real path to the log.
+
+```json
+"Serilog": {
+    "Folder": "Log",
+    "File": "ProductFeederServiceWorker.log",
+    "Size": 5242880
+},
+```
 
 #### 8. From Docker to Azure Container
 
