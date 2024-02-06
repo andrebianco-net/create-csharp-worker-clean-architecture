@@ -1,6 +1,26 @@
 # create-csharp-worker-clean-architecture
 
-#### 1. From Docker to Azure Container
+## Overview:
+
+## General Scope:
+
+## How to run this project
+
+#### 1. Clone project:
+
+#### 2. Update file appsettings.json with a valid:
+
+#### 3. Compile project:
+
+#### 4. Test project:
+
+#### 5. Run project:
+
+#### 6. MongoDB document
+
+#### 7. Set the log folder
+
+#### 8. From Docker to Azure Container
 
 ```bash
 $ docker build -t product-feeder-service .
@@ -26,7 +46,7 @@ $ docker push youruricreatedinazurecontainerregistry.azurecr.io/product-feeder-s
 [$ docker pull youruricreatedinazurecontainerregistry.azurecr.io/product-feeder-service]
 ```
 
-#### 2. Created in Azure Cloud Computing
+#### 9. Created in Azure Cloud Computing
 ###
 ![image](https://github.com/andrebianco-net/create-csharp-worker-clean-architecture/assets/453193/492804b2-ab89-4402-b496-48790af88a67)
 
